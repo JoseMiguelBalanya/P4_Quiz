@@ -86,7 +86,7 @@ exports.playCmd = rl => {
         if (toBeResolved.length <= 0) {
             log(`No hay mas preguntas`);
             log(`Fin del examen. Aciertos:`);
-            biglog(`${score}`, 'pink');
+            log(`${score}`);
             rl.prompt();
         } else {
             let id = Math.floor(Math.random() * toBeResolved.length);
@@ -103,7 +103,7 @@ exports.playCmd = rl => {
                 else{
                     log(`INCORRECTO`);
                     log(`Fin del examen. Aciertos:`);
-                    biglog(`${score}`, 'pink');
+                    log(`${score}`);
                     rl.prompt();
                 }
             });
