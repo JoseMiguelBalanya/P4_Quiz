@@ -65,8 +65,8 @@ exports.testCmd = (rl, id) => {
                 } else {
                     log(`Su respuesta es:`);
                     biglog(`INCORRECTO`, 'red');
-                    rl.prompt();
                 }
+                rl.prompt();
             });
         } catch (error) {
             errorlog(error.message);
