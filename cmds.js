@@ -59,11 +59,11 @@ exports.testCmd = (rl, id) => {
                 let quest = quiz.answer.toLowerCase().trim();
                 let answ = respuesta.toLowerCase().trim();
                 if (answ === quest) {
-                    log(`Su respuesta es:`);
+                    log(`Su respuesta es correcta:`);
                     biglog(`CORRECTO`, 'green');
                     rl.prompt();
                 } else {
-                    log(`Su respuesta es:`);
+                    log(`Su respuesta es incorrecta:`);
                     biglog(`INCORRECTO`, 'red');
                 }
                 rl.prompt();
