@@ -85,7 +85,7 @@ exports.playCmd = rl => {
     const playOne = () => {
         if (toBeResolved.length <= 0) {
             log(`No hay mas preguntas`);
-            log(`Fin del examen. Aciertos:`)
+            log(`Fin del examen. Aciertos:`);
             biglog(`${score}`, 'pink');
             rl.prompt();
         } else {
@@ -102,7 +102,7 @@ exports.playCmd = rl => {
                 }
                 else{
                     log(`INCORRECTO`);
-                    log(`Fin del examen. Aciertos:`)
+                    log(`Fin del examen. Aciertos:`);
                     biglog(`${score}`, 'pink');
                     rl.prompt();
                 }
