@@ -139,29 +139,27 @@ exports.playCmd = rl => {
       const playOne = () => {
         return new Promise ((resolve, reject) => {
     			if(toBeResolved.length === 0) {
-              log(`No hay mas preguntas`);
-              log(`Fin del examen. Aciertos:`);
-              log(`${score}`);
-    					resolve();
-    					return;
+                    log(`No hay mas preguntas`);
+                    log(`Fin del examen. Aciertos: ${score}`);
+    			    resolve();
+    				return;
     			}
-    			let id = Math.floor(Math.random() * toBeResolved.length);
-    			let quiz = toBeResolved[id];
-    		  toBeResolved.splice(id, 1);
-    		  makeQuestion(rl, quiz.question)
-    		  .then(answ => {
-             quest = quiz.answer.toLowerCase().trim()
-             ans = answ.toLowerCase().trim()
-             if(ans === quest){
-                  score++;
-                  log(`CORRECTO - Lleva ${score} aciertos.`);
-    				      resolve(playOne());
-             }else{
-                  log(`INCORRECTO`);
-                  log(`Fin del examen. Aciertos:`);
-                  log(`${score}`);
-    				      resolve();
-    			   }
+    	let id = Math.floor(Math.random() * toBeResolved.length);
+    	let quiz = toBeResolved[id];
+        toBeResolved.splice(id, 1);
+    	makeQuestion(rl, quiz.question)
+    	.then(answ => {
+        quest = quiz.answer.toLowerCase().trim()
+        ans = answ.toLowerCase().trim()
+        if(ans === quest){
+                score++;
+                log(`CORRECTO - Lleva ${score} aciertos.`);
+    		    resolve(playOne());
+        }else{
+                log(`INCORRECTO`);
+                log(`Fin del examen. Aciertos: ${score}`);
+    		    resolve();
+    	}
     		  })
     	   })
     	}
