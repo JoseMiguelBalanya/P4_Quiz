@@ -139,26 +139,27 @@ exports.playCmd = rl => {
       const playOne = () => {
         return Sequelize.Promise.resolve()
             .then(()=>{
-                if(toBeResolved.length<=0){
-                    log('No hay nada más que preguntar.','red');
-                    log(`Fin del juego. Aciertos: ${score}`);
-                    biglog(`${score}`, 'blue');
+                if(toBeResolved.length === 0){
+                    log(`No hay mas preguntas`);
+                    log(`Fin del examen. Aciertos:`);
+                    log(`${score}`);
                     return;
                 }
-                let pos = Math.floor(Math.random()*toBeResolved.length);
-                let quiz = toBeResolved[pos];
-                toBeResolved.splice(pos,1);
-
-                return makeQuestion(rl,`${quiz.question}: `)
-                    .then(answer =>{
-                        if(answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()){
+                let id = Math.floor(Math.random() * toBeResolved.length);
+                let quiz = toBeResolved[id];
+                toBeResolved.splice(id,1);
+                return makeQuestion(rl,`¿${quiz.question}?: `)
+                    .then(answ => {
+                        quest = quiz.answer.toLowerCase().trim()
+                        ans = answ.toLowerCase().trim()
+                        if(ans === quest){
                             score++;
-                            log(`CORRECTO - Lleva ${score} aciertos`,'green');
+                            log(`CORRECTO - Lleva ${score} aciertos.`);
                             return playOne();
                         }else{
-                            log(`INCORRECTO.`, 'red');
-                            log(`Fin del juego. Aciertos: ${score}`);
-                            biglog(`${score}`,'blue');
+                            log(`INCORRECTO`);
+                            log(`Fin del examen. Aciertos:`);
+                            log(`${score}`);
                             return;
                         }
 
