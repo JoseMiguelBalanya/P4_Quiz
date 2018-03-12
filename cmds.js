@@ -144,36 +144,32 @@ exports.playCmd = rl => {
     			    resolve();
     				return;
     			}
-    	let id = Math.floor(Math.random() * toBeResolved.length);
-    	let quiz = toBeResolved[id];
-        toBeResolved.splice(id, 1);
-    	makeQuestion(rl, quiz.question)
-    	.then(answ => {
-        quest = quiz.answer.toLowerCase().trim()
-        ans = answ.toLowerCase().trim()
-        if(ans === quest){
+    	    let id = Math.floor(Math.random() * toBeResolved.length);
+    	    let quiz = toBeResolved[id];
+            toBeResolved.splice(id, 1);
+    	    makeQuestion(rl, quiz.question)
+    	    .then(answ => {
+            quest = quiz.answer.toLowerCase().trim()
+            ans = answ.toLowerCase().trim()
+            if(ans === quest){
                 score++;
                 log(`CORRECTO - Lleva ${score} aciertos.`);
     		    resolve(playOne());
-        }else{
+            }else{
                 log(`INCORRECTO`);
                 log(`Fin del examen. Aciertos: ${score}`);
     		    resolve();
-    	}
-    		  })
-    	   })
+    	    }
+    	})
+        })
     	}
     	models.quiz.findAll({raw: true}) 
     	.then(quizzes => {
     			toBeResolved = quizzes;
       })
-    	.then(() => {
-    		 	return playOne(); 
-    	})
-      .catch(Sequelize.ValidationError, error => {
-        errorlog('El quiz es erroneo:');
-        error.errors.forEach(({message}) => errorlog(message));
-     })
+      .then(() => {
+    		 return playOne(); 
+      })
      .catch(error => {
         errorlog(error.message);
      })
